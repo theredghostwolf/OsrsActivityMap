@@ -18,7 +18,7 @@ app.get('/api/message', (req, res) => {
 }); 
 
 app.get('/', (req, res) => {
-res.send('Hello MEAN Stack!');
+res.send('Index');
 });
 
 
