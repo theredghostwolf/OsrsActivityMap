@@ -1,4 +1,10 @@
-<p *ngIf="message">
-  {{message.message}}
-</p>
+<div *ngIf="message">
+  <ul>
+    <li *ngFor="let m of message">
+      {{m.ActivityName}}
+    </li>
+  </ul>
+  
+</div>
+
 <router-outlet />

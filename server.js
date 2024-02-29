@@ -1,6 +1,16 @@
 const express = require('express');
+const mysql = require('mysql');
 const app = express();
 const port = 3000;
+
+const DBConnection = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password: 'root',
+    database: 'osrsactivitymap'
+})
+
+DBConnection.connect();
 
 // handling CORS 
 app.use((req, res, next) => { 
@@ -12,9 +22,15 @@ app.use((req, res, next) => {
 }); 
   
 // route for handling requests from the Angular client 
-app.get('/api/message', (req, res) => { 
-    res.json({ message:  
-            'hello hello hello!' }); 
+app.get('/api/message', (req, res) => {
+    DBConnection.query("SELECT * FROM Activities", (err, rows, fields) => {
+        if (err) throw err;
+        var objs = [];
+        for (var i=0; i < rows.length; i++) {
+            objs.push(JSON.parse(JSON.stringify(rows[i])));
+        }
+        res.json(objs)
+    }); 
 }); 
 
 app.get('/', (req, res) => {

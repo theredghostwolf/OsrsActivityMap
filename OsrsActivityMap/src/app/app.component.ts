@@ -9,10 +9,11 @@ import { ApiService } from './api.service';
 export class AppComponent {
   title = 'OsrsActivityMap';
   message: any; 
-  
+
   constructor(private apiService: ApiService) { }; 
   ngOnInit() { 
       this.apiService.getMessage().subscribe(data => { 
+          console.log(data);
           this.message = data; 
       }); 
   } 

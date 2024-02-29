@@ -5,6 +5,9 @@ DROP TABLE IF EXISTS Regions;
 DROP TABLE IF EXISTS Skills;
 DROP TABLE IF EXISTS ActivityTypes;
 
+DROP TABLE IF EXISTS InventorySetups;
+DROP TABLE IF EXISTS Items;
+
 Create table if not exists ActivityTypes (
 	ID int not null UNIQUE,
     ActivityType varchar(255),
@@ -115,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Items (
     Primary KEY(ID)
 );
 
-CREATE TABLE InventorySetup(
+CREATE TABLE InventorySetups(
 	ID int not null unique,
     name varchar(255),
     slot1 int,
@@ -162,5 +165,12 @@ INSERT INTO ActivityLocations VALUES (1,4,0,0);
 INSERT INTO Activities VALUES (1,"Hunting Black chinchompas", 2, 1, 110000, 180000, 1000000, 2500000, null);
 #(activityID, skillID)
 INSERT INTO RelatedSkills VALUES (1,1,11);
+
+#(region, posx, posy)
+INSERT INTO ActivityLocations VALUES (2,4,0,0);
+#(name, type, location, minXp, maxXP, minGp, maxGP, icon)
+INSERT INTO Activities VALUES (2,"Killing Vorkath", 1, 1, 110000, 180000, 1000000, 2500000, null);
+#(activityID, skillID)
+INSERT INTO RelatedSkills VALUES (2,1,11);
 
 
