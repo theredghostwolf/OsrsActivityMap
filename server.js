@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 // route for handling requests from the Angular client 
 app.get('/api/message', (req, res) => { 
     res.json({ message:  
-            'Test from the server' }); 
+            'hello hello hello!' }); 
 }); 
 
 app.get('/', (req, res) => {
