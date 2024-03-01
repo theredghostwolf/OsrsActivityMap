@@ -1,11 +1,15 @@
 Drop TABLE IF EXISTS RelatedSkills;
+DROP TABLE IF EXISTS RecommendedSkills;
+DROP TABLE IF EXISTS RequiredSkills;
 DROP TABLE IF EXISTS Activities;
 DROP TABLE IF EXISTS ActivityLocations;
 DROP TABLE IF EXISTS Regions;
 DROP TABLE IF EXISTS Skills;
 DROP TABLE IF EXISTS ActivityTypes;
 
+DROP TABLE Spellbooks;
 DROP TABLE IF EXISTS InventorySetups;
+DROP TABLE IF EXISTS GearSetups;
 DROP TABLE IF EXISTS Items;
 
 Create table if not exists ActivityTypes (
@@ -49,32 +53,44 @@ Create table if not exists Skills (
 );
 
 #adds all skills
-INSERT INTO Skills VALUES (1,"Attack", 1, null);
-INSERT INTO Skills VALUES (2,"Strength", 1, null);
-INSERT INTO Skills VALUES (3,"Defence", 1, null);
-INSERT INTO Skills VALUES (4,"HitPoints", 1, null);
-INSERT INTO Skills VALUES (5,"Ranged", 1, null);
-INSERT INTO Skills VALUES (6,"Magic", 1, null);
-INSERT INTO Skills VALUES (7,"Prayer",  1, null);
+INSERT INTO Skills VALUES (1,"Attack", 1, 'Attack_icon.png');
+INSERT INTO Skills VALUES (2,"Strength", 1, 'Strength_icon.png');
+INSERT INTO Skills VALUES (3,"Defence", 1, 'Defence_icon.png');
+INSERT INTO Skills VALUES (4,"HitPoints", 1, 'Hitpoints_icon.png');
+INSERT INTO Skills VALUES (5,"Ranged", 1, 'Ranged_icon.png');
+INSERT INTO Skills VALUES (6,"Magic", 1, 'Magic_icon.png');
+INSERT INTO Skills VALUES (7,"Prayer",  1, 'Prayer_icon.png');
 
-INSERT INTO Skills VALUES (8,"Mining", 2, null);
-INSERT INTO Skills VALUES (9,"Woodcutting", 2, null);
-INSERT INTO Skills VALUES (10,"Fishing", 2, null);
-INSERT INTO Skills VALUES (11,"Hunter", 2, null);
-INSERT INTO Skills VALUES (12,"Farming", 2, null);
+INSERT INTO Skills VALUES (8,"Mining", 2, 'Mining_icon.png');
+INSERT INTO Skills VALUES (9,"Woodcutting", 2, 'Woodcutting_icon.png');
+INSERT INTO Skills VALUES (10,"Fishing", 2, 'Fishing_icon.png');
+INSERT INTO Skills VALUES (11,"Hunter", 2, 'Hunter_icon.png');
+INSERT INTO Skills VALUES (12,"Farming", 2, 'Farming_icon.png');
 
-INSERT INTO Skills VALUES (13,"Smithing", 3, null);
-INSERT INTO Skills VALUES (14,"Cooking", 3, null);
-INSERT INTO Skills VALUES (15,"Firemaking", 3, null);
-INSERT INTO Skills VALUES (16,"Runecraft", 3, null);
-INSERT INTO Skills VALUES (17,"Construction", 3, null);
-INSERT INTO Skills VALUES (18,"Crafting", 3, null);
-INSERT INTO Skills VALUES (19,"Herblore", 3, null);
-INSERT INTO Skills VALUES (20, "Fletching", 3, null);
+INSERT INTO Skills VALUES (13,"Smithing", 3, 'Smithing_icon.png');
+INSERT INTO Skills VALUES (14,"Cooking", 3, 'Cooking_icon.png');
+INSERT INTO Skills VALUES (15,"Firemaking", 3, 'Firemaking_icon.png');
+INSERT INTO Skills VALUES (16,"Runecraft", 3, 'Runecraft_icon.png');
+INSERT INTO Skills VALUES (17,"Construction", 3, 'Construction_icon.png');
+INSERT INTO Skills VALUES (18,"Crafting", 3, 'Crafting_icon.png');
+INSERT INTO Skills VALUES (19,"Herblore", 3, 'Herblore_icon.png');
+INSERT INTO Skills VALUES (20, "Fletching", 3, 'Flechting_icon.png');
 
-INSERT INTO Skills VALUES (21,"Thieving", 4, null);
-INSERT INTO Skills VALUES (22,"Slayer", 4, null);
-INSERT INTO Skills VALUES (23,"Agility", 4, null);
+INSERT INTO Skills VALUES (21,"Thieving", 4, 'Thieving_icon.png');
+INSERT INTO Skills VALUES (22,"Slayer", 4, 'Slayer_icon.png');
+INSERT INTO Skills VALUES (23,"Agility", 4, 'Agility_icon.png');
+
+CREATE TABLE IF NOT EXISTS Spellbooks (
+	ID int not null unique,
+    Name varchar(255) not null,
+    Icon varchar(255),
+    primary key (ID)
+);
+
+INSERT INTO Spellbooks (id, name) VALUES (1, "standard");
+INSERT INTO Spellbooks (id, name) VALUES (2, "arceuus");
+INSERT INTO Spellbooks (id, name) VALUES (3, "ancient");
+INSERT INTO Spellbooks (id, name) VALUES (4, "lunar");
 
 CREATE TABLE IF NOT EXISTS ActivityLocations (
 	LocationID int not null auto_increment unique,
@@ -110,6 +126,26 @@ CREATE TABLE IF NOT EXISTS RelatedSkills (
     foreign key (SkillID) REFERENCES Skills (SkillID)
 );
 
+CREATE TABLE IF NOT EXISTS RequiredSkills (
+	ID int not null auto_increment unique,
+    ActivityID int not null,
+    SkillID int not null,
+    Level int not null,
+    primary key (ID),
+    FOREIGN KEY (ActivityID) REFERENCES Activities (ActivityID),
+    foreign key (SkillID) REFERENCES Skills (SkillID)
+);
+
+CREATE TABLE IF NOT EXISTS RecommendedSkills (
+	ID int not null auto_increment unique,
+    ActivityID int not null,
+    SkillID int not null,
+    Level int not null,
+    primary key (ID),
+    FOREIGN KEY (ActivityID) REFERENCES Activities (ActivityID),
+    foreign key (SkillID) REFERENCES Skills (SkillID)
+);
+
 #stores all items in the game
 CREATE TABLE IF NOT EXISTS Items (
 	ID int not null unique,
@@ -118,7 +154,7 @@ CREATE TABLE IF NOT EXISTS Items (
     Primary KEY(ID)
 );
 
-CREATE TABLE InventorySetups(
+CREATE TABLE IF NOT EXISTS InventorySetups(
 	ID int not null unique,
     name varchar(255),
     slot1 int,
@@ -156,6 +192,22 @@ CREATE TABLE InventorySetups(
     slot27 int,
     slot28 int,
     Primary Key (ID)
+);
+
+CREATE TABLE IF NOT EXISTS GearSetups (
+	ID int not null unique,
+    HeadSlot int,
+    CapeSlot int,
+    NeckSlot int,
+    AmmunitionSlot int,
+    WeaponSlot int,
+    ShieldSlot int,
+    BodySlot int,
+    LegsSlot int,
+    HandsSlot int,
+    FeetSlot int,
+    RingSlot int,
+    primary key (ID)
 );
 
 #creates an example activity on the map
