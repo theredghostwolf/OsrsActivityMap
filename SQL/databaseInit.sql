@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS RecommendedSkills (
 CREATE TABLE IF NOT EXISTS Items (
 	ID int not null unique,
     Name varchar(255),
-    icon varchar(255),
+    Icon varchar(255),
     Primary KEY(ID)
 );
 

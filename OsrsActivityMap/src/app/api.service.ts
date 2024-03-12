@@ -6,8 +6,15 @@ import { HttpClient } from '@angular/common/http';
 }) 
 export class ApiService { 
 	constructor(private http: HttpClient) { } 
-	getMessage() { 
-		return this.http.get( 
-			'http://localhost:3000/api/message'); 
+	findItems(name: string) {
+		return this.http.get('http://localhost:3000/api/items/find?name=' + name);
 	} 
+
+	getItems() {
+		return this.http.get('http://localhost:3000/api/items');
+	}
+
+	getRandomInventory() {
+		return this.http.get('http://localhost:3000/api/generateRandomSetup');
+	}
 }

@@ -23,11 +23,27 @@ app.use((req, res, next) => {
   
 // route for handling requests from the Angular client 
 app.get('/api/activities', (req, res) => {
-    
+    sql = "SELECT * FROM Activities";
+    DBConnection.query(sql, (err, rows, fields) => {
+        if (err) throw err;
+        var objs = [];
+        for (var i=0; i < rows.length; i++) {
+            objs.push(JSON.parse(JSON.stringify(rows[i])));
+        }
+        res.json(objs)
+    }); 
 });
 
 app.get('/api/items', (req, res) => {
-
+    sql = "SELECT * FROM Items";
+    DBConnection.query(sql, (err, rows, fields) => {
+        if (err) throw err;
+        var objs = [];
+        for (var i=0; i < rows.length; i++) {
+            objs.push(JSON.parse(JSON.stringify(rows[i])));
+        }
+        res.json(objs)
+    }); 
 });
 
 app.get('/api/items/find', (req, res) => {
@@ -40,6 +56,27 @@ app.get('/api/items/find', (req, res) => {
         }
         res.json(objs)
     }); 
+})
+
+app.get('/api/generateRandomSetup', (req, res) => {
+    sql = "SELECT * FROM Items";
+    DBConnection.query(sql, (err, rows, fields) => {
+        if (err) throw err;
+        var objs = [];
+        for (var i=0; i < rows.length; i++) {
+            objs.push(JSON.parse(JSON.stringify(rows[i])));
+        }
+
+        var gear = []
+        for (let index = 0; index < 28; index++) {
+            gear[index] = objs[Math.floor(Math.random() * objs.length)];
+        }
+
+        res.json(gear);
+
+
+    });
+
 })
 
 
