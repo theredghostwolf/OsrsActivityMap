@@ -54,7 +54,22 @@ app.get('/api/items/find', (req, res) => {
         for (var i=0; i < rows.length; i++) {
             objs.push(JSON.parse(JSON.stringify(rows[i])));
         }
+       
         res.json(objs)
+    }); 
+})
+
+app.get('/api/allactivities', (req, res) => {
+    sql = "SELECT * FROM Activities JOIN activitytypes ON activities.ActivityType = activitytypes.ID JOIN relatedskills ON activities.ActivityID = relatedskills.ActivityID JOIN skills ON relatedskills.SkillID = skills.SkillID";
+  
+    DBConnection.query(sql, (err, rows, fields) => {
+        if (err) throw err;
+        var objs = [];
+        for (var i=0; i < rows.length; i++) {
+            objs.push(JSON.parse(JSON.stringify(rows[i])));
+        }
+    
+        res.json(objs);
     }); 
 })
 
@@ -81,5 +96,5 @@ app.get('/api/generateRandomSetup', (req, res) => {
 
 
 app.listen(port, () => {
-console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });

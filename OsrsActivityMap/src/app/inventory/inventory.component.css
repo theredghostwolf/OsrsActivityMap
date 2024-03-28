@@ -1,0 +1,14 @@
+.itemList {
+    overflow:hidden;
+    overflow-y: scroll;
+    height: 200px;
+    width: 250px;
+}
+
+.inventory_table {
+    background: url("/assets/inventoryIcons/Inventory_tab.png") no-repeat;
+    width: 400px;
+    height: 540px;
+    background-size: cover;
+    text-align: center;
+}

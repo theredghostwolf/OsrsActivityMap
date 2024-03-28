@@ -223,6 +223,8 @@ INSERT INTO ActivityLocations VALUES (2,4,0,0);
 #(name, type, location, minXp, maxXP, minGp, maxGP, icon)
 INSERT INTO Activities VALUES (2,"Killing Vorkath", 1, 1, 110000, 180000, 1000000, 2500000, null);
 #(activityID, skillID)
-INSERT INTO RelatedSkills VALUES (2,1,11);
+INSERT INTO RelatedSkills VALUES (2,2,1);
+INSERT INTO RelatedSkills VALUES (3,2,2);
+INSERT INTO RelatedSkills VALUES (4,2,3);
 
 

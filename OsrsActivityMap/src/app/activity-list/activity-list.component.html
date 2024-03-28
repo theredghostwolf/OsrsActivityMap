@@ -1,0 +1,18 @@
+<table *ngIf="activities">
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>GP/h</th>
+            <th>XP/h</th>
+            <th>Skill(s)</th>
+        </tr>
+        <tr *ngFor="let a of activities.activities">
+            <td>{{a.ActivityName}}</td>
+            <td>{{a.ActivityType}}</td>
+            <td>{{a.MinGPPerHour}} - {{a.MaxGPPerHour}}</td>
+            <td>{{a.MinXPPerHour}} - {{a.MaxXPPerHour}}</td>
+            <td><img src="assets/skillIcons/{{a.Icon}}" alt="{{a.skillName}}"></td>
+        </tr>
+    </tbody>
+</table>
