@@ -1,17 +1,23 @@
 <table *ngIf="activities">
-    <tbody>
+    <thead>
         <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>GP/h</th>
-            <th>XP/h</th>
-            <th>Skill(s)</th>
+            <th (click)="activities.setSortedField('ActivityName')">Name</th>
+            <th (click)="activities.setSortedField('ActivityType')">Type</th>
+            <th (click)="activities.setSortedField('MinGPPerHour')">min GP/h</th>
+            <th (click)="activities.setSortedField('MaxGPPerHour')">max GP/h</th>
+            <th (click)="activities.setSortedField('MinXPPerHour')">min XP/h</th>
+            <th (click)="activities.setSortedField('MaxXPPerHour')">max XP/h</th>
+            <th (click)="activities.setSortedField('skillName')">Skill(s)</th>
         </tr>
-        <tr *ngFor="let a of activities.activities">
+    </thead>
+    <tbody>
+        <tr *ngFor="let a of activities.list">
             <td>{{a.ActivityName}}</td>
             <td>{{a.ActivityType}}</td>
-            <td>{{a.MinGPPerHour}} - {{a.MaxGPPerHour}}</td>
-            <td>{{a.MinXPPerHour}} - {{a.MaxXPPerHour}}</td>
+            <td>{{a.MinGPPerHour}}</td>
+            <td>{{a.MaxGPPerHour}}</td>
+            <td>{{a.MinXPPerHour}}</td>
+            <td>{{a.MaxXPPerHour}}</td>
             <td><img src="assets/skillIcons/{{a.Icon}}" alt="{{a.skillName}}"></td>
         </tr>
     </tbody>

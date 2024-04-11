@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CreateGearSetupComponent } from './create-gear-setup/create-gear-setup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InventoryComponent,
     ActivityListComponent,
-    NavbarComponent
+    NavbarComponent,
+    CreateGearSetupComponent
   ],
   imports: [
     BrowserModule,

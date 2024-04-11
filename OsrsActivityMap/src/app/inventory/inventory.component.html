@@ -1,29 +1,18 @@
 <div>
-<div *ngIf="selectedItem">
-    <img src="assets/Icons/{{selectedItem.Icon}}" alt=""> {{selectedItem.Name}}
-</div>
-
-<input type="text" #search (keyup)="searchItems(search.value)" placeholder="search" name="search">
-<ul *ngIf="items" class="list-group itemList">
-    <li *ngFor="let i of items.items" (click)="selectItem(i)" class="list-group-item">
-        <img src="assets/Icons/{{i.Icon}}" alt="{{i.Name}}" >{{i.Name}} 
-    </li>
-</ul>
-
-<div class="gear-setup" *ngIf="gearsetup.inventory.getItem(1)">
-    <div class="inventory">
-        <table class="inventory_table">
-            <tbody>
-            <tr *ngFor="let row of gearsetup.inventory.getAs2DArray(); index as y">
-                <td *ngFor="let i of row; index as x" (click)="setItem(x + 1 + (y * 4))">
-                    <img
-                    src="assets/Icons/{{i.icon}}"
-                    alt="{{i.name}}"
-                    title="{{i.name}}" class="inventory_icon_image">
-                </td>
-            </tr>
-        </tbody>
-        </table>
+    <div class="gear-setup" *ngIf="gearsetup.inventory.getItem(1)">
+        <div class="inventory">
+            <table class="inventory_table">
+                <tbody>
+                <tr *ngFor="let row of gearsetup.inventory.getAs2DArray(); index as y">
+                    <td *ngFor="let i of row; index as x">
+                        <img
+                        src="assets/Icons/{{i.icon}}"
+                        alt="{{i.name}}"
+                        title="{{i.name}}" class="inventory_icon_image">
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
     </div>
-</div>
 </div>
