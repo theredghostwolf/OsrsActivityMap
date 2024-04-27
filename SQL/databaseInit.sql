@@ -35,13 +35,14 @@ INSERT INTO Regions VALUES (1,"Misthalin");
 INSERT INTO Regions VALUES (2,"Asgarnia");
 INSERT INTO Regions VALUES (3,"Morytania");
 INSERT INTO Regions VALUES (4,"Wilderness");
-INSERT INTO Regions VALUES (5,"Zeah");
+INSERT INTO Regions VALUES (5,"Kourend");
 INSERT INTO Regions VALUES (6,"Varlamore");
 INSERT INTO Regions VALUES (7,"Tirannwn");
-INSERT INTO Regions VALUES (8,"Feldip Hills");
-INSERT INTO Regions VALUES (9,"Fremennik Isles");
-INSERT INTO Regions VALUES (10,"Fremennik Province");
-INSERT INTO Regions VALUES (11,"Troll Country");
+INSERT INTO Regions VALUES (8,"Fremennik");
+INSERT INTO Regions VALUES (9,"Karamja");
+INSERT INTO Regions VALUES (10,"Desert");
+
+
 
 Create table if not exists Skills (
 	SkillID int not null UNIQUE,
@@ -212,19 +213,31 @@ CREATE TABLE IF NOT EXISTS GearSetups (
 
 #creates an example activity on the map
 #(region, posx, posy)
-INSERT INTO ActivityLocations VALUES (1,4,0,0);
+INSERT INTO ActivityLocations VALUES (1,4,1450,250);
 #(name, type, location, minXp, maxXP, minGp, maxGP, icon)
-INSERT INTO Activities VALUES (1,"Hunting Black chinchompas", 2, 1, 110000, 180000, 1000000, 2500000, null);
+INSERT INTO Activities VALUES (1,"Hunting Black chinchompas", 1, 1, 110000, 180000, 1000000, 2500000, null);
 #(activityID, skillID)
 INSERT INTO RelatedSkills VALUES (1,1,11);
 
 #(region, posx, posy)
-INSERT INTO ActivityLocations VALUES (2,4,0,0);
+INSERT INTO ActivityLocations VALUES (2,8,750,200);
 #(name, type, location, minXp, maxXP, minGp, maxGP, icon)
-INSERT INTO Activities VALUES (2,"Killing Vorkath", 1, 1, 110000, 180000, 1000000, 2500000, null);
+INSERT INTO Activities VALUES (2,"Killing Vorkath", 2, 2, 110000, 180000, 1000000, 2500000, null);
 #(activityID, skillID)
 INSERT INTO RelatedSkills VALUES (2,2,1);
-INSERT INTO RelatedSkills VALUES (3,2,2);
-INSERT INTO RelatedSkills VALUES (4,2,3);
+
+INSERT INTO ActivityLocations VALUES (3,5,300,200);
+INSERT INTO Activities VALUES (3, "Slayer", 1,3, 15000,80000,250000,4000000, null);
+INSERT INTO RelatedSkills VALUES (3,3,22);
+
+INSERT INTO ActivityLocations VALUES (4,5,350,350);
+INSERT INTO Activities VALUES (4, "Cutting redwoods", 2, 4, 60000,80000, 300000,400000, null);
+INSERT INTO RelatedSkills VALUES (4,4,9);
+
+INSERT INTO ActivityLocations VALUES (5,10,1575,950);
+INSERT INTO Activities VALUES (5, "Pyrnamid Plunder", 2, 5, 30000,180000, 100000,600000, null);
+INSERT INTO RelatedSkills VALUES (5,5,21);
+
+
 
 

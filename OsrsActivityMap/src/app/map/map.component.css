@@ -1,0 +1,11 @@
+.osrsmapcanvas {
+    width: 2048;
+    height: 1191;
+    float: left;
+}
+
+.activityList {
+    width: 200;
+    float: right;
+    font-size: 30px;
+}

@@ -10,6 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CreateGearSetupComponent } from './create-gear-setup/create-gear-setup.component';
 import { MapComponent } from './map/map.component';
 import { GeTrackerComponent } from './ge-tracker/ge-tracker.component';
+import { SlayerGuideComponent } from './slayer-guide/slayer-guide.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { GeTrackerComponent } from './ge-tracker/ge-tracker.component';
     NavbarComponent,
     CreateGearSetupComponent,
     MapComponent,
-    GeTrackerComponent
+    GeTrackerComponent,
+    SlayerGuideComponent
   ],
   imports: [
     BrowserModule,

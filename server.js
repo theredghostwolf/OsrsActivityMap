@@ -60,7 +60,7 @@ app.get('/api/items/find', (req, res) => {
 })
 
 app.get('/api/allactivities', (req, res) => {
-    sql = "SELECT * FROM Activities JOIN activitytypes ON activities.ActivityType = activitytypes.ID JOIN relatedskills ON activities.ActivityID = relatedskills.ActivityID JOIN skills ON relatedskills.SkillID = skills.SkillID";
+    sql = "SELECT * FROM Activities JOIN activitytypes ON activities.ActivityType = activitytypes.ID JOIN relatedskills ON activities.ActivityID = relatedskills.ActivityID JOIN skills ON relatedskills.SkillID = skills.SkillID JOIN ActivityLocations on activities.location = LocationID JOIN Regions ON ActivityLocations.Region = regions.RegionID";
   
     DBConnection.query(sql, (err, rows, fields) => {
         if (err) throw err;
