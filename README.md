@@ -1,4 +1,4 @@
-Installation:
+## Installation:
 
 1. Start your MYSQL server
 
@@ -12,3 +12,19 @@ Installation:
 4. Start the angular front-end server by executing `ng serve` in the OsrsActivityMap directory.
 
 5. Connect to the front-end in a browser on port 4200
+
+## About
+
+The application currently contains serveral pages:
+
+- The map page, this page displays all available activities on a map along side an overview table.
+  Hovering over the overview table will highlight the location on the map
+  Clicking either the link in the overview table or clicking the icon on the map will redirect to a post about the activity
+
+- Blog page, which loads a markdown file with relevant information for the selected activity
+
+- overview page with some extra information on the activities
+
+- WIP inventory page, this page shows certain inventory setups.
+
+- WIP inventory edit page, for creating inventory setups
