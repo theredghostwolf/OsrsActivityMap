@@ -1,14 +1,17 @@
 import json
 import mysql.connector
 
+user = "root"
+password = "root"
+
 file = open("ItemMapping.json")
 data = json.load(file)
 file.close()
 
 db = mysql.connector.connect(
     host='localhost',
-    user='root',
-    password='root',
+    user=user,
+    password=password,
     database='osrsactivitymap'
 )
 

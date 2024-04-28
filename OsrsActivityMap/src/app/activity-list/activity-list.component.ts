@@ -20,9 +20,7 @@ export class ActivityListComponent implements OnInit{
     this.apiService.getAllActivities().subscribe(data => {
       this.activities.setList(data as Array<any>);
     })
+
   }
-
-  
-
 
 }

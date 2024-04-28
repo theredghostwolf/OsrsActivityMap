@@ -3,10 +3,13 @@ const mysql = require('mysql');
 const app = express();
 const port = 3000;
 
+const user = 'root';
+const password = 'root';
+
 const DBConnection = mysql.createConnection({
     host:'localhost',
-    user:'root',
-    password: 'root',
+    user:user,
+    password: password,
     database: 'osrsactivitymap'
 })
 

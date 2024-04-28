@@ -33,7 +33,6 @@ export class MapComponent implements OnInit, AfterViewInit  {
    
     this.activities = new sortableList(new Array<activity>());
     this.apiservice.getAllActivities().subscribe(data => {
-      console.log(data);
       if (Array.isArray(data)) {
         let dataArray = data as any[];
         for (let index = 0; index < dataArray.length; index++) {
