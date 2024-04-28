@@ -1,27 +1,25 @@
 <div class="osrsMap">
     <canvas #osrsmapcanvas width="2048" height="1191" id="osrsmapcanvas" (click)="navigateToActivity($event)" class="osrsmapcanvas"></canvas>
     <div class="activityList">
-       <table *ngIf="activities">
+       <table *ngIf="activities" class="activityTable">
             <thead>
                 <tr>
-                    <td>
-                        <!-- icon-->
-                    </td>
-                    <td>Name</td>
-                    <td>Region</td>
-                    <td>Type</td>
+                    <td (click)="activities.setSortedField('skill')">Skill</td>
+                    <td (click)="activities.setSortedField('name')">Name</td>
+                    <td (click)="activities.setSortedField('region')">Region</td>
+                    <td (click)="activities.setSortedField('type')">Type</td>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let a of activities" (mouseenter)="setCircles([a.pos])" (mouseleave)="setCircles([])" >
+                <tr *ngFor="let a of activities.list" (mouseenter)="setCircles([a.pos])" (mouseleave)="setCircles([])" >
                     <td>
-                        <img src="{{a.icon.src}}" alt="">
+                        <img src="{{a.icon.src}}" alt="{{a.skill}}" title="{{a.skill}}" width="300%" class="skillIcon">
                     </td>
                     <td>
                         <a href="{{a.getLink()}}">{{a.name}}</a>
                     </td>
                     <td>
-                        <img src="/assets/areaBanners/{{a.region}}_Area_Badge.png" alt=""> {{a.region}}
+                        <img src="/assets/areaBanners/{{a.region}}_Area_Badge.png" alt="{{a.region}}" title="{{a.region}}" class="areaBanner">
                     </td>
                     <td>
                         {{a.type}}

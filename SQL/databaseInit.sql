@@ -1,3 +1,6 @@
+CREATE DATABASE osrsactivitymap;
+USE osrsactivitymap;
+
 Drop TABLE IF EXISTS RelatedSkills;
 DROP TABLE IF EXISTS RecommendedSkills;
 DROP TABLE IF EXISTS RequiredSkills;
@@ -215,7 +218,7 @@ CREATE TABLE IF NOT EXISTS GearSetups (
 #(region, posx, posy)
 INSERT INTO ActivityLocations VALUES (1,4,1450,250);
 #(name, type, location, minXp, maxXP, minGp, maxGP, icon)
-INSERT INTO Activities VALUES (1,"Hunting Black chinchompas", 1, 1, 110000, 180000, 1000000, 2500000, null);
+INSERT INTO Activities VALUES (1,"Hunting Black chinchompas", 2, 1, 110000, 180000, 1000000, 2500000, null);
 #(activityID, skillID)
 INSERT INTO RelatedSkills VALUES (1,1,11);
 
@@ -235,8 +238,14 @@ INSERT INTO Activities VALUES (4, "Cutting redwoods", 2, 4, 60000,80000, 300000,
 INSERT INTO RelatedSkills VALUES (4,4,9);
 
 INSERT INTO ActivityLocations VALUES (5,10,1575,950);
-INSERT INTO Activities VALUES (5, "Pyrnamid Plunder", 2, 5, 30000,180000, 100000,600000, null);
+INSERT INTO Activities VALUES (5, "Pyramid Plunder", 2, 5, 30000,180000, 100000,600000, null);
 INSERT INTO RelatedSkills VALUES (5,5,21);
+
+INSERT INTO ActivityLocations VALUES (6,6,150,650);
+#(name, type, location, minXp, maxXP, minGp, maxGP, icon)
+INSERT INTO Activities VALUES (6,"Hunter Rumours", 2, 6, 110000, 180000, 1000000, 2500000, null);
+#(activityID, skillID)
+INSERT INTO RelatedSkills VALUES (6,6,11);
 
 
 

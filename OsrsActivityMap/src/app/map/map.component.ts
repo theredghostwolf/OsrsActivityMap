@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, HostListener} from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { Router } from '@angular/router';
+import { sortableList } from '../base/sortableList';
 
 @Component({
   selector: 'app-map',
@@ -17,7 +18,7 @@ export class MapComponent implements OnInit, AfterViewInit  {
   }
 
   @ViewChild("osrsmapcanvas", {static: false}) mapCanvasElement: ElementRef;
-  public activities: Array<activity>;
+  public activities: sortableList;
   public iconScale: number;
 
   public backgroundImage: HTMLImageElement;
@@ -25,17 +26,20 @@ export class MapComponent implements OnInit, AfterViewInit  {
 
   constructor(private el: ElementRef, private apiservice: ApiService, private router: Router) {
     this.iconScale = 2;
+    this.circles = [];
   }
 
   ngOnInit(): void {   
    
-    this.activities = new Array<activity>();
+    this.activities = new sortableList(new Array<activity>());
     this.apiservice.getAllActivities().subscribe(data => {
+      console.log(data);
       if (Array.isArray(data)) {
         let dataArray = data as any[];
         for (let index = 0; index < dataArray.length; index++) {
           const el = dataArray[index];
-          this.activities.push(new activity(el.ActivityName, el.SkillName, el.ActivityType, el.RegionName, el.maxGPPerHour, el.minGPPerHour, el.maxXPPerHour, el.minXPPerHour, el.Icon, new Position(el.PositionX, el.positionY)))
+        
+          this.activities.list.push(new activity(el.ActivityName, el.skillName, el.ActivityType, el.RegionName, el.maxGPPerHour, el.minGPPerHour, el.maxXPPerHour, el.minXPPerHour, el.Icon, new Position(el.PositionX, el.positionY)))
         }
       }
     })
@@ -51,7 +55,7 @@ export class MapComponent implements OnInit, AfterViewInit  {
     if (context) {
       this.backgroundImage.onload = () => {
         this.renderCanvas(context);
-        this.activities.forEach(act => {
+        this.activities.list.forEach(act => {
           act.icon.onload = () => {
             this.renderCanvas(context);
           }
@@ -73,16 +77,18 @@ export class MapComponent implements OnInit, AfterViewInit  {
     
    
       this.renderCanvas(context);
-      this.activities.forEach(act => {
+      let found = false;
+      this.activities.list.forEach(act => {
         if (cursorPos.x >= act.pos.x && cursorPos.x <= act.pos.x + (20 * this.iconScale) && cursorPos.y >= act.pos.y && cursorPos.y <= act.pos.y + (20 * this.iconScale)) {
-          
+          found = true;
           context.font = "25px serif";
           context.fillStyle = "white";
           context.fillText(act.name, cursorPos.x, cursorPos.y);
-
+          //this.circles = [act.pos];
         }
       
       });
+  
     }
   }
 
@@ -105,16 +111,24 @@ export class MapComponent implements OnInit, AfterViewInit  {
   }
 
   drawActivities(context: CanvasRenderingContext2D, scale: number): void {
-    this.activities.forEach(act => {
+    this.activities.list.forEach(act => {
       context.drawImage(act.icon ,act.pos.x, act.pos.y, act.icon.width * scale, act.icon.height * scale);
     });
 
     this.circles.forEach(p => {
-      context.strokeStyle = "red";
+      context.save()
+      
       context.lineWidth = 5;
       context.beginPath();
       context.arc(p.x + (12 * this.iconScale), p.y + (12 * this.iconScale), (20 * this.iconScale), 0, 2*Math.PI);
+      context.fillStyle = "Yellow";
+      context.globalAlpha = 0.3;
+      context.fill();
+      context.strokeStyle = "white";
+      context.globalAlpha = 1;
       context.stroke();
+     
+      context.restore();
     });
   }
 
@@ -124,7 +138,7 @@ export class MapComponent implements OnInit, AfterViewInit  {
     let r = canvas.getBoundingClientRect();
     let cursorPos = new Position(e.clientX - r.left, e.clientY - r.top);
 
-    this.activities.forEach(act => {
+    this.activities.list.forEach(act => {
       if (cursorPos.x >= act.pos.x && cursorPos.x <= act.pos.x + (20 * this.iconScale) && cursorPos.y >= act.pos.y && cursorPos.y <= act.pos.y + (20 * this.iconScale)) {
         this.router.navigate([act.getLink()]) 
       }
@@ -170,7 +184,7 @@ class activity {
   }
 
   public getLink(): string {
-    return "/" + this.name.replace(/ /g,"_");
+    return "/post/" + this.name.replace(/ /g,"_");
   }
 }
 

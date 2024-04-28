@@ -7,5 +7,20 @@
 .activityList {
     width: 200;
     float: right;
-    font-size: 30px;
+    font-size: 25px;
+}
+
+.skillIcon {
+    width: 90%;
+    height: auto;
+}
+
+.areaBanner {
+    width: 75%;
+    height: auto;
+}
+
+.activityTable > tbody > tr > td {
+    padding-left: 3px;
+    padding-right: 3px;
 }

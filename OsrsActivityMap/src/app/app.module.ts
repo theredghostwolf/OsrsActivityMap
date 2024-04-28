@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 
@@ -11,6 +11,9 @@ import { CreateGearSetupComponent } from './create-gear-setup/create-gear-setup.
 import { MapComponent } from './map/map.component';
 import { GeTrackerComponent } from './ge-tracker/ge-tracker.component';
 import { SlayerGuideComponent } from './slayer-guide/slayer-guide.component';
+import { BlogComponent } from './blog/blog.component';
+import { MarkdownComponent, MarkdownModule, provideMarkdown } from 'ngx-markdown';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -21,16 +24,20 @@ import { SlayerGuideComponent } from './slayer-guide/slayer-guide.component';
     CreateGearSetupComponent,
     MapComponent,
     GeTrackerComponent,
-    SlayerGuideComponent
+    SlayerGuideComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    RouterModule,
+    HttpClientModule,
+    MarkdownModule
   ],
   providers: [
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    provideMarkdown()
   ],
   bootstrap: [AppComponent]
 })
